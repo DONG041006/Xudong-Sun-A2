@@ -6,7 +6,7 @@ public class AssignmentTwo {
         assignment.partFourA();
         assignment.partFourB();
         assignment.partFive();
-        // assignment.partSix();
+        assignment.partSix();
         // assignment.partSeven();
     }
 
@@ -148,7 +148,24 @@ public class AssignmentTwo {
         System.out.println("\nCycling history of this round (3 people)：");
         carousel.printRideHistory();
     }
-    public void partSix() {}
+    public void partSix() {
+        System.out.println("\n=== Part6 Export cycling history to file demonstration ===");
+        // 1. Create a Ride object and add 5 tourists
+        Ride rollerCoaster = new Ride("Extreme roller coaster", "Roller Coaster", null, 4);
+        Visitor v1 = new Visitor("Emma", 23, "13300133001", "TICKET028", true);
+        Visitor v2 = new Visitor("Liam", 26, "13300133002", "TICKET029", false);
+        Visitor v3 = new Visitor("Olivia", 21, "13300133003", "TICKET030", true);
+        Visitor v4 = new Visitor("Noah", 29, "13300133004", "TICKET031", false);
+        Visitor v5 = new Visitor("Sophia", 24, "13300133005", "TICKET032", true);
+        rollerCoaster.addVisitorToHistory(v1);
+        rollerCoaster.addVisitorToHistory(v2);
+        rollerCoaster.addVisitorToHistory(v3);
+        rollerCoaster.addVisitorToHistory(v4);
+        rollerCoaster.addVisitorToHistory(v5);
+        // 2. Export to CSV file
+        String filePath = "rideHistory.csv";
+        rollerCoaster.exportRideHistory(filePath);
+    }
     public void partSeven() {}
 
 }

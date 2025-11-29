@@ -2,6 +2,9 @@ import java.util.Queue;
 import java.util.LinkedList;
 import java.util.Comparator;
 import java.util.Collections;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Ride implements RideInterface {
     // 3 instance variables (name, type, operator (Employee type), maximum passenger capacity (to be used in Part 5 later, defined in advance)
@@ -169,6 +172,33 @@ public class Ride implements RideInterface {
         // 5. Update the number of runs
         numOfCycles++;
         System.out.println("Successfully run" + rideName + "No." + numOfCycles + "wheel");
+    }
+    public void exportRideHistory(String filePath) {
+        if (rideHistory.isEmpty()) {
+            System.out.println(rideName + "No cycling history available, no need to export");
+            return;
+        }
+        // exception handling
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            // write header
+            writer.write("Name, age, contact information, ticket ID, VIP status");
+            writer.newLine();
+            // Write data for each tourist
+            for (Visitor visitor : rideHistory) {
+                String line = String.format("%s,%d,%s,%s,%b",
+                        visitor.getName(),
+                        visitor.getAge(),
+                        visitor.getContactNumber(),
+                        visitor.getTicketId(),
+                        visitor.isVip()
+                );
+                writer.write(line);
+                writer.newLine();
+            }
+            System.out.println("Successfully exported" + rideName + "Cycling history to：" + filePath);
+        } catch (IOException e) {
+            System.err.println("Error: Exporting file failed! Reason:" + e.getMessage());
+        }
     }
     // Rewrite toString()
     @Override
