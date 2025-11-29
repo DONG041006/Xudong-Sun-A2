@@ -3,7 +3,7 @@ public class AssignmentTwo {
         //You can call various part methods here to test
         AssignmentTwo assignment = new AssignmentTwo();
         assignment.partThree();
-        // assignment.partFourA();
+        assignment.partFourA();
         // assignment.partFourB();
         // assignment.partFive();
         // assignment.partSix();
@@ -40,10 +40,93 @@ public class AssignmentTwo {
         rollerCoaster.printQueue();
     }
 
+
     // Other part methods occupy space (gradually implemented in the future)
-    public void partFourA() {}
-    public void partFourB() {}
+    public void partFourA() {
+        System.out.println("=== Part 4A Cycling History Function Demonstration ===");
+
+        // 1. Create operator object (for associating rides)
+        Employee waterRideOperator = new Employee(
+                "Xiao Wang",
+                28,
+                "13900139006",
+                "EMP003",
+                "Water Ride"
+        );
+
+        // 2.
+        Ride thunderstormRide = new Ride(
+                "暴雨漂流",
+                "Water Ride",
+                waterRideOperator,
+                6
+        );
+
+        // 3. Create 5 tourist objects
+        Visitor visitor1 = new Visitor(
+                "Paul",
+                20,
+                "13700137001",
+                "TICKET006",
+                false
+        );
+        Visitor visitor2 = new Visitor(
+                "Sherly",
+                24,
+                "13700137002",
+                "TICKET007",
+                true
+        );
+        Visitor visitor3 = new Visitor(
+                "Ben",
+                27,
+                "13700137003",
+                "TICKET008",
+                false
+        );
+        Visitor visitor4 = new Visitor(
+                "David",
+                32,
+                "13700137004",
+                "TICKET009",
+                true
+        );
+        Visitor visitor5 = new Visitor(
+                "Lisa",
+                19,
+                "13700137005",
+                "TICKET010",
+                false
+        );
+    }
+    public void partFourB() {
+        System.out.println("\n=== Part 4B Cycling History Sorting Demonstration ===");
+        // 1.Create a Ride object
+        Ride ferrisWheel = new Ride("Ferris wheel", "Family Ride", null, 8);
+        // 2.Create 5 tourists (including VIP and different age groups)
+        Visitor v1 = new Visitor("Alice", 22, "13600136001", "TICKET012", true);
+        Visitor v2 = new Visitor("Bob", 18, "13600136002", "TICKET013", false);
+        Visitor v3 = new Visitor("Charlie", 25, "13600136003", "TICKET014", true);
+        Visitor v4 = new Visitor("Diana", 20, "13600136004", "TICKET015", false);
+        Visitor v5 = new Visitor("Ethan", 28, "13600136005", "TICKET016", true);
+        // 3. Add to History
+        ferrisWheel.addVisitorToHistory(v1);
+        ferrisWheel.addVisitorToHistory(v2);
+        ferrisWheel.addVisitorToHistory(v3);
+        ferrisWheel.addVisitorToHistory(v4);
+        ferrisWheel.addVisitorToHistory(v5);
+        // 4. Print before sorting
+        System.out.println("\nCycling history before sorting：");
+        ferrisWheel.printRideHistory();
+        // 5. Call sorting method (using custom comparator)
+        System.out.println("\nSort by Execution (VIP First → Age Ascending）：");
+        ferrisWheel.sortRideHistory(new VisitorComparator());
+        // 6. Sort and print
+        System.out.println("\nSorted cycling history：");
+        ferrisWheel.printRideHistory();
+    }
     public void partFive() {}
     public void partSix() {}
     public void partSeven() {}
+
 }

@@ -1,5 +1,7 @@
 import java.util.Queue;
 import java.util.LinkedList;
+import java.util.Comparator;
+import java.util.Collections;
 
 public class Ride implements RideInterface {
     // 3 instance variables (name, type, operator (Employee type), maximum passenger capacity (to be used in Part 5 later, defined in advance)
@@ -127,6 +129,19 @@ public class Ride implements RideInterface {
             System.out.println(index + ". " + visitor);
             index++;
         }
+    }
+
+    public void sortRideHistory(Comparator<Visitor> comparator) {
+        if (comparator == null) {
+            System.out.println("Error: Sorter is empty, unable to sort");
+            return;
+        }
+        if (rideHistory.isEmpty()) {
+            System.out.println(rideName + "No cycling history available, no sorting required");
+            return;
+        }
+        Collections.sort(rideHistory, comparator);
+        System.out.println(rideName + "Cycling history sorting completed");
     }
 
     // -------------------------- Part5接口方法实现 --------------------------
