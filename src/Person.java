@@ -1,4 +1,4 @@
-public class Person {
+public abstract class Person {
     //3 instance variables (name, age, contact information, in line with personnel general attributes)
     private String name;
     private int age;
