@@ -4,8 +4,8 @@ public class AssignmentTwo {
         AssignmentTwo assignment = new AssignmentTwo();
         assignment.partThree();
         assignment.partFourA();
-        // assignment.partFourB();
-        // assignment.partFive();
+        assignment.partFourB();
+        assignment.partFive();
         // assignment.partSix();
         // assignment.partSeven();
     }
@@ -125,7 +125,29 @@ public class AssignmentTwo {
         System.out.println("\nSorted cycling history：");
         ferrisWheel.printRideHistory();
     }
-    public void partFive() {}
+    public void partFive() {
+        System.out.println("\n=== Part 5: Run a cycling demonstration for one round ===");
+        // 1. Create operator
+        Employee operator = new Employee("Xiao Bai", 35, "13500135000", "EMP002", "Family Ride");
+        // 2. Create a Ride object（maxRider=3）
+        Ride carousel = new Ride("merry-go-round", "Family Ride", operator, 3);
+        // 3. Add 10 tourists to the queue (meeting the minimum requirement of 10)
+        for (int i = 1; i <= 10; i++) {
+            Visitor visitor = new Visitor("tourist" + i, 10 + i, "1340013400" + i, "TICKET0" + (17 + i), i % 3 == 0);
+            carousel.addVisitorToQueue(visitor);
+        }
+        // 4. Print pre run queue
+        System.out.println("\nPre run queue (10 people)：");
+        carousel.printQueue();
+        // 5.Run one round
+        carousel.runOneCycle();
+        // 6. Print the queue after running (7 people remaining)
+        System.out.println("\nPost run queue (7 people remaining)：");
+        carousel.printQueue();
+        // 7. 打印骑行历史（3人）
+        System.out.println("\nCycling history of this round (3 people)：");
+        carousel.printRideHistory();
+    }
     public void partSix() {}
     public void partSeven() {}
 

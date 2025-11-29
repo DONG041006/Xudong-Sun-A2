@@ -110,7 +110,7 @@ public class Ride implements RideInterface {
     @Override
     public int numberOfVisitors() {
         int count = rideHistory.size();
-        System.out.println(rideName + "累计乘坐人数：" + count);
+        System.out.println(rideName + "Accumulated number of passengers：" + count);
         return count;
     }
 
@@ -144,11 +144,31 @@ public class Ride implements RideInterface {
         System.out.println(rideName + "Cycling history sorting completed");
     }
 
-    // -------------------------- Part5接口方法实现 --------------------------
+    // -------------------------- Part5Interface method implementation --------------------------
     @Override
     public void runOneCycle() {
-        // Part 5 logic will be further improved by leaving it blank and printing a prompt
-        System.out.println("待实现runOneCycle方法");
+        System.out.println("\n=== execute" + rideName + "One cycle of cycling ===");
+        // 1. Verify if there is an operator present
+        if (operator == null) {
+            System.out.println("error：" + rideName + "Unallocated operator, unable to run");
+            return;
+        }
+        // 2. Verify if the queue is empty
+        if (waitingLine.isEmpty()) {
+            System.out.println("error：" + rideName + "No waiting tourists, unable to operate");
+            return;
+        }
+        // 3. Calculate the number of passengers that can be carried in this round
+        int ridersThisCycle = Math.min(maxRider, waitingLine.size());
+        System.out.println("The number of people that can be carried in this round：" + ridersThisCycle);
+        // 4. Remove tourists from the queue and add them to the history
+        for (int i = 0; i < ridersThisCycle; i++) {
+            Visitor rider = waitingLine.poll();
+            addVisitorToHistory(rider);
+        }
+        // 5. Update the number of runs
+        numOfCycles++;
+        System.out.println("Successfully run" + rideName + "No." + numOfCycles + "wheel");
     }
     // Rewrite toString()
     @Override
