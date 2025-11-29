@@ -5,6 +5,9 @@ import java.util.Collections;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class Ride implements RideInterface {
     // 3 instance variables (name, type, operator (Employee type), maximum passenger capacity (to be used in Part 5 later, defined in advance)
@@ -198,6 +201,41 @@ public class Ride implements RideInterface {
             System.out.println("Successfully exported" + rideName + "Cycling history to：" + filePath);
         } catch (IOException e) {
             System.err.println("Error: Exporting file failed! Reason:" + e.getMessage());
+        }
+    }
+    public void importRideHistory(String filePath) {
+        // exception handling
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            boolean isFirstLine = true; // 跳过表头
+            int importedCount = 0;
+            while ((line = reader.readLine()) != null) {
+                if (isFirstLine) {
+                    isFirstLine = false;
+                    continue;
+                }
+                // Split CSV fields
+                String[] fields = line.split(",");
+                if (fields.length != 5) {
+                    System.out.println("Warning: Skip invalid data rows：" + line);
+                    continue;
+                }
+                // parse field
+                String name = fields[0];
+                int age = Integer.parseInt(fields[1]);
+                String contact = fields[2];
+                String ticketId = fields[3];
+                boolean isVip = Boolean.parseBoolean(fields[4]);
+                // Create tourist objects and add them to history
+                Visitor visitor = new Visitor(name, age, contact, ticketId, isVip);
+                addVisitorToHistory(visitor);
+                importedCount++;
+            }
+            System.out.println("Successfully imported" + importedCount + "Cycling history data");
+        } catch (IOException e) {
+            System.err.println("Error: Import file failed! Reason:" + e.getMessage());
+        } catch (NumberFormatException e) {
+            System.err.println("Error: Data format error (age must be a number)! Reason:" + e.getMessage());
         }
     }
     // Rewrite toString()
